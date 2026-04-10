@@ -229,10 +229,21 @@ Sem pressa… mas só nós dois, do nosso jeito. 🤍
 
 <script>
 
-// ENTRAR
+// 💥 ENTRAR COM EXPLOSÃO
 document.getElementById("startScreen").onclick = () => {
-    document.getElementById("startScreen").style.display = "none";
-    document.getElementById("content").style.display = "block";
+
+    const start = document.getElementById("startScreen");
+    const content = document.getElementById("content");
+
+    // explosão de pétalas
+    for(let i = 0; i < 40; i++){
+        createExplosionPetal();
+    }
+
+    setTimeout(()=>{
+        start.style.display = "none";
+        content.style.display = "block";
+    },800);
 };
 
 // CORAÇÕES
@@ -251,7 +262,7 @@ function createHeart(){
 }
 setInterval(createHeart,300);
 
-// PÉTALAS
+// PÉTALAS CONTÍNUAS
 function createPetal(){
     const petal = document.createElement("div");
     petal.classList.add("petal");
@@ -265,7 +276,32 @@ function createPetal(){
 }
 setInterval(createPetal,200);
 
-// ANIMAÇÃO
+// 💥 EXPLOSÃO
+function createExplosionPetal(){
+    const petal = document.createElement("div");
+    petal.classList.add("petal");
+
+    petal.style.left = "50vw";
+    petal.style.top = "50vh";
+
+    const x = (Math.random() - 0.5) * 600;
+    const y = (Math.random() - 1) * 800;
+
+    petal.style.transition = "transform 1.5s ease-out, opacity 1.5s";
+
+    document.body.appendChild(petal);
+
+    setTimeout(()=>{
+        petal.style.transform = `translate(${x}px, ${y}px) rotate(720deg)`;
+        petal.style.opacity = "0";
+    },10);
+
+    setTimeout(()=>{
+        petal.remove();
+    },1500);
+}
+
+// ANIMAÇÃO SCROLL
 function revealOnScroll(){
     const elements = document.querySelectorAll('.reveal, .final');
 
