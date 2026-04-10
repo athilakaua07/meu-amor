@@ -25,7 +25,7 @@ body{
     100%{background-position:0% 50%;}
 }
 
-/* estrelas */
+/* ⭐ estrelas */
 .star{
     position:fixed;
     width:2px;
@@ -41,7 +41,7 @@ body{
     to{opacity:1;}
 }
 
-/* corações */
+/* 💕 corações */
 .heart{
     position:fixed;
     pointer-events:none;
@@ -52,14 +52,14 @@ body{
     to{transform:translateY(100vh);opacity:0;}
 }
 
-/* pétalas */
+/* 🌸 pétalas */
 .petal{
     position:fixed;
     pointer-events:none;
     filter:drop-shadow(0 0 8px pink);
 }
 
-/* start */
+/* tela inicial */
 #startScreen{
     position:fixed;
     width:100%;
@@ -72,7 +72,7 @@ body{
     cursor:pointer;
 }
 
-/* content */
+/* conteúdo */
 #content{
     display:none;
     position:relative;
@@ -80,6 +80,7 @@ body{
     text-align:center;
 }
 
+/* nome */
 .name{
     margin-top:60px;
     font-family:'Great Vibes';
@@ -121,51 +122,47 @@ body{
     min-height:200px;
 }
 
-/* US SECTION */
+/* 🔥 SEÇÃO US */
 .us-section{
     max-width:900px;
     margin:60px auto;
     display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
-    gap:15px;
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    gap:20px;
 }
 
-/* CARD PRETO */
 .us-card{
     position:relative;
-    height:180px;
-    background:#000;
-    border:1px solid #333;
-    border-radius:15px;
     cursor:pointer;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    overflow:hidden;
 }
 
-/* TEXTO US? */
+.us-card img{
+    width:100%;
+    border-radius:15px;
+    opacity:0;
+    transform:scale(0.9);
+    transition:0.6s;
+}
+
 .us-card::before{
     content:"US?";
     position:absolute;
-    font-family:'Great Vibes';
-    font-size:2.5rem;
-    color:#fff;
-    transition:0.4s;
-}
-
-/* IMAGEM */
-.us-card img{
     width:100%;
     height:100%;
-    object-fit:cover;
-    opacity:0;
-    transition:0.5s;
+    background:#000;
+    color:#fff;
+    font-family:'Great Vibes';
+    font-size:3rem;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    border-radius:15px;
+    transition:0.6s;
 }
 
-/* REVELAR */
 .us-card.active img{
     opacity:1;
+    transform:scale(1);
 }
 
 .us-card.active::before{
@@ -234,16 +231,12 @@ body{
 
 <div class="letter" id="typing"></div>
 
-<!-- US 7 SLOTS -->
+<!-- 🔥 NOVA PARTE -->
 <section class="us-section">
 
-<div class="us-card"><img src="img1.jpg"></div>
-<div class="us-card"><img src="img2.jpg"></div>
-<div class="us-card"><img src="img3.jpg"></div>
-<div class="us-card"><img src="img4.jpg"></div>
-<div class="us-card"><img src="img5.jpg"></div>
-<div class="us-card"><img src="img6.jpg"></div>
-<div class="us-card"><img src="img7.jpg"></div>
+<div class="us-card"><img src="amm.jpg"></div>
+<div class="us-card"><img src="aa.jpg.jfif"></div>
+<div class="us-card"><img src="cc.jpg.jfif"></div>
 
 </section>
 
@@ -259,7 +252,7 @@ body{
 
 <script>
 
-/* estrelas */
+// estrelas
 for(let i=0;i<120;i++){
 let s=document.createElement("div");
 s.classList.add("star");
@@ -268,36 +261,16 @@ s.style.left=Math.random()*100+"vw";
 document.body.appendChild(s);
 }
 
-/* TEXTO COMPLETO */
-const text=`Depois que eu vi aquilo que vc fez pra mim, eu fiquei um tempo olhando pra tela depois de terminar de ler…
+// texto completo
+const text=`Depois que eu vi aquilo que vc fez pra mim, eu fiquei um tempo olhando pra tela...
 
 Não foi só por ler… foi porque eu senti cada palavra.
 
-É estranho explicar, mas parecia que enquanto eu lia, eu tava revivendo tudo… cada conversa, cada momento simples que acabou ficando importante sem a gente nem perceber.
+Eu não sei em que momento você virou alguém tão presente pra mim.
 
-Eu não sei em que momento você virou alguém tão presente pra mim. Só sei que hoje, qualquer coisa que acontece, é automático pensar em você.
+Hoje qualquer coisa que acontece eu penso em você.
 
-Tipo “preciso contar isso pra ela”.
-
-Tem dias que eu nem tô tão bem, mas aí lembro de você… e parece que tudo fica mais leve.
-
-Você tem esse jeito de acalmar as coisas dentro de mim sem nem tentar.
-
-E eu gosto disso na gente.
-
-Gosto de como é leve… mas ao mesmo tempo tão intenso.
-
-Sem pressão, sem pressa, sem precisar definir tudo.
-
-Só sendo.
-
-E sendo algo bom.
-
-Eu tambem não sei exatamente onde isso vai dar…
-
-Mas sei que eu quero continuar com voce até o fim.
-
-Sem pressa… mas só nós dois, do nosso jeito. 🤍`;
+E eu quero continuar com voce até o fim. 🤍`;
 
 let i=0, started=false;
 
@@ -319,12 +292,12 @@ typing();
 }
 });
 
-/* revelar US */
+// revelar fotos
 document.querySelectorAll(".us-card").forEach(card=>{
-card.onclick=()=>card.classList.toggle("active");
+card.onclick=()=>card.classList.add("active");
 });
 
-/* start */
+// entrada
 document.getElementById("startScreen").onclick=()=>{
 document.getElementById("startScreen").style.display="none";
 document.getElementById("content").style.display="block";
@@ -342,13 +315,13 @@ else clearInterval(fade);
 for(let i=0;i<50;i++) createExplosionPetal();
 };
 
-/* música */
+// botão música
 document.getElementById("musicBtn").onclick=()=>{
 let m=document.getElementById("music");
 m.paused?m.play():m.pause();
 };
 
-/* corações */
+// corações
 setInterval(()=>{
 let h=document.createElement("div");
 h.innerHTML="💕";
@@ -360,7 +333,7 @@ document.body.appendChild(h);
 setTimeout(()=>h.remove(),7000);
 },300);
 
-/* pétalas */
+// explosão
 function createExplosionPetal(){
 let p=document.createElement("div");
 p.innerHTML="🌸";
@@ -381,7 +354,6 @@ p.animate([
 
 setTimeout(()=>p.remove(),1500);
 }
-
 </script>
 
 </body>
