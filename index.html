@@ -61,39 +61,80 @@ body{
 
 /* NOME */
 .name{
-    margin-top:80px;
+    margin-top:60px;
     font-family:'Great Vibes';
-    font-size:5rem;
+    font-size:4rem;
     color:#ff85a2;
 }
 
-/* SEÇÃO AMOR */
+/* SEÇÃO */
 .love-section{
-    margin:80px auto;
-    max-width:900px;
+    margin:60px auto;
+    max-width:600px;
 }
 
+/* ITEM */
 .love-item{
-    margin-bottom:60px;
+    margin-bottom:50px;
 }
 
+/* TEXTO */
 .love-text{
     font-family:'Great Vibes';
-    font-size:2.5rem;
-    margin-bottom:20px;
+    font-size:2rem;
+    margin-bottom:15px;
 }
 
+/* IMAGEM COM EFEITO */
 .love-item img{
     width:100%;
-    border-radius:20px;
+    max-height:250px;
+    object-fit:cover;
+    border-radius:15px;
+    transition:0.5s;
+}
+
+.love-item:hover img{
+    transform:scale(1.05);
+    filter:brightness(1.2);
 }
 
 /* CARTA */
 .letter{
     max-width:700px;
-    margin:50px auto;
-    font-size:1.2rem;
+    margin:80px auto;
+    font-size:1.1rem;
     line-height:1.8;
+    padding:20px;
+    text-align:left;
+}
+
+/* ANIMAÇÃO AO DESCER */
+.reveal{
+    opacity:0;
+    transform:translateY(40px);
+    transition:all 1s ease;
+}
+
+.reveal.active{
+    opacity:1;
+    transform:translateY(0);
+}
+
+/* FINAL */
+.final{
+    font-family:'Great Vibes';
+    font-size:3rem;
+    text-align:center;
+    margin:100px 0;
+    opacity:0;
+    transform:scale(0.8);
+    transition:1s;
+}
+
+.final.active{
+    opacity:1;
+    transform:scale(1);
 }
 </style>
 </head>
@@ -110,35 +151,63 @@ body{
 
 <section class="love-section">
 
-<div class="love-item">
+<div class="love-item reveal">
     <div class="love-text">Amo você como Leon ama Ada</div>
     <img src="leon.jpg">
 </div>
 
-<div class="love-item">
+<div class="love-item reveal">
     <div class="love-text">Amo você como eu penso em você todos os dias</div>
     <img src="bob.jpg">
 </div>
 
-<div class="love-item">
+<div class="love-item reveal">
     <div class="love-text">Amo você mesmo quando nem sei explicar</div>
     <img src="joe.jpg">
 </div>
 
-<div class="love-item">
+<div class="love-item reveal">
     <div class="love-text">Amo você do nosso jeito</div>
     <img src="leon.jpg">
 </div>
 
 </section>
 
-<div class="letter">
-Eu não sei explicar exatamente quando você virou tudo isso pra mim…
+<div class="letter reveal">
+Depois que eu vi aquilo que vc fez pra mim, eu fiquei um tempo olhando pra tela depois de terminar de ler…
 
-Mas virou.
+Não foi só por ler… foi porque eu senti cada palavra.
 
-E eu só sei que quero continuar com você. 🤍
+É estranho explicar, mas parecia que enquanto eu lia, eu tava revivendo tudo… cada conversa, cada momento simples que acabou ficando importante sem a gente nem perceber.
+
+Eu não sei em que momento você virou alguém tão presente pra mim. Só sei que hoje, qualquer coisa que acontece, é automático pensar em você.
+
+Tipo “preciso contar isso pra ela”.
+
+Tem dias que eu nem tô tão bem, mas aí lembro de você… e parece que tudo fica mais leve.
+
+Você tem esse jeito de acalmar as coisas dentro de mim sem nem tentar.
+
+E eu gosto disso na gente.
+
+Gosto de como é leve… mas ao mesmo tempo tão intenso.
+
+Sem pressão, sem pressa, sem precisar definir tudo.
+
+Só sendo.
+
+E sendo algo bom.
+
+Eu tambem não sei exatamente onde isso vai dar…
+
+Mas sei que eu quero continuar com voce até o fim.
+
+Quero continuar assim.
+
+Sem pressa… mas só nós dois, do nosso jeito. 🤍
 </div>
+
+<div class="final">Eu te amo Gabrielly 💕</div>
 
 </div>
 
@@ -166,6 +235,22 @@ function createHeart(){
 }
 
 setInterval(createHeart,300);
+
+// ANIMAÇÃO AO DESCER
+function revealOnScroll(){
+    const elements = document.querySelectorAll('.reveal, .final');
+
+    elements.forEach(el => {
+        const windowHeight = window.innerHeight;
+        const elementTop = el.getBoundingClientRect().top;
+
+        if(elementTop < windowHeight - 100){
+            el.classList.add('active');
+        }
+    });
+}
+
+window.addEventListener('scroll', revealOnScroll);
 
 </script>
 
