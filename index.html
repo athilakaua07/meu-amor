@@ -2,7 +2,7 @@
 <html lang="pt-br">
 <head>
 <meta charset="UTF-8">
-<title>Texto + US Animado</title>
+<title>Texto + US animado</title>
 
 <style>
 body{
@@ -21,16 +21,15 @@ body{
   max-width:800px;
 }
 
-/* TEXTO NORMAL */
+/* TEXTO */
 #texto{
   font-size:18px;
   line-height:1.6;
   white-space:pre-wrap;
   word-wrap:break-word;
-  color:white;
 }
 
-/* US CONTAINER */
+/* US */
 .us-container{
   margin-top:30px;
   display:grid;
@@ -38,7 +37,7 @@ body{
   gap:15px;
 }
 
-/* US BOX */
+/* BOX */
 .us-box{
   background:#000;
   border:1px solid #444;
@@ -56,12 +55,12 @@ body{
   overflow:hidden;
 }
 
-/* animação entrada */
+/* entrada */
 .us-box.show{
   animation: aparecer 0.6s ease forwards;
 }
 
-/* glitch só nos US */
+/* glitch nos US */
 .us-box.show::before,
 .us-box.show::after{
   content:"";
@@ -111,6 +110,7 @@ body{
 <body>
 
 <div class="container">
+
   <div id="texto"></div>
 
   <div class="us-container">
@@ -119,15 +119,40 @@ body{
     <div class="us-box">US SLOT 3</div>
     <div class="us-box">US SLOT 4</div>
   </div>
+
 </div>
 
 <script>
 
-const textoCompleto = `COLE SEU TEXTO AQUI
+const textoCompleto = `Depois que eu vi aquilo que vc fez pra mim, eu fiquei um tempo olhando pra tela depois de terminar de ler…
 
-(coloque aqui exatamente o seu texto completo, sem cortar nada)
+Não foi só por ler… foi porque eu senti cada palavra.
 
-Ele vai aparecer inteiro antes dos US slots.`
+É estranho explicar, mas parecia que enquanto eu lia, eu tava revivendo tudo… cada conversa, cada momento simples que acabou ficando importante sem a gente nem perceber.
+
+Eu não sei em que momento você virou alguém tão presente pra mim. Só sei que hoje, qualquer coisa que acontece, é automático pensar em você.
+
+Tipo “preciso contar isso pra ela”.
+
+Tem dias que eu nem tô tão bem, mas aí lembro de você… e parece que tudo fica mais leve.
+
+Você tem esse jeito de acalmar as coisas dentro de mim sem nem tentar.
+
+E eu gosto disso na gente.
+
+Gosto de como é leve… mas ao mesmo tempo tão intenso.
+
+Sem pressão, sem pressa, sem precisar definir tudo.
+
+Só sendo.
+
+E sendo algo bom.
+
+Eu tambem não sei exatamente onde isso vai dar…
+
+Mas sei que eu quero continuar com voce até o fim.
+
+Sem pressa… mas só nós dois, do nosso jeito. 🤍`
 
 const textoEl = document.getElementById("texto");
 const usBoxes = document.querySelectorAll(".us-box");
