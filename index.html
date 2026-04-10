@@ -1,283 +1,223 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Para Minha Mulher ❤️</title>
-    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Para Gabrielly 🤍</title>
 
-        body {
-            font-family: 'Poppins', sans-serif;
-            background: linear-gradient(135deg, #1a1a1a 0%, #2d1b69 50%, #8b0000 100%);
-            color: #fff;
-            overflow-x: hidden;
-            min-height: 100vh;
-        }
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@300;400&display=swap" rel="stylesheet">
 
-        /* Animação de pétalas */
-        .petals {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 1000;
-        }
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
 
-        .petal {
-            position: absolute;
-            width: 20px;
-            height: 20px;
-            background: linear-gradient(45deg, #ff1493, #ff69b4, #dc143c);
-            clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
-            animation: float 6s infinite linear;
-        }
+body{
+    font-family:'Poppins',sans-serif;
+    background:linear-gradient(135deg,#000,#2d1b69,#8b0000);
+    color:#fff;
+    overflow-x:hidden;
+}
 
-        @keyframes float {
-            0% {
-                transform: translateY(100vh) rotate(0deg);
-                opacity: 1;
-            }
-            100% {
-                transform: translateY(-100px) rotate(360deg);
-                opacity: 0;
-            }
-        }
+/* TELA INICIAL */
+#startScreen{
+    position:fixed;
+    width:100%;
+    height:100%;
+    background:#000;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    flex-direction:column;
+    z-index:9999;
+    cursor:pointer;
+}
 
-        /* Header */
-        .header {
-            text-align: center;
-            padding: 100px 20px 50px;
-            position: relative;
-            z-index: 10;
-        }
+#startScreen h1{
+    font-family:'Dancing Script';
+    font-size:3rem;
+    animation:pulse 2s infinite;
+}
 
-        .title {
-            font-family: 'Dancing Script', cursive;
-            font-size: clamp(3rem, 8vw, 8rem);
-            font-weight: 700;
-            background: linear-gradient(45deg, #ff1493, #ff69b4, #dc143c);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            margin-bottom: 20px;
-            animation: pulse 2s infinite;
-        }
+@keyframes pulse{
+    0%,100%{transform:scale(1);}
+    50%{transform:scale(1.1);}
+}
 
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-        }
+/* CONTEÚDO */
+#content{
+    display:none;
+    text-align:center;
+}
 
-        .subtitle {
-            font-size: clamp(1.2rem, 3vw, 2rem);
-            opacity: 0.9;
-            margin-bottom: 30px;
-        }
+/* NOME */
+.name{
+    margin-top:80px;
+    font-family:'Dancing Script';
+    font-size:5rem;
+    background:linear-gradient(45deg,#ff1493,#ff69b4);
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+    animation:fadeIn 3s ease forwards;
+}
 
-        /* Imagens dos casais */
-        .couples-section {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-            padding: 50px 20px;
-            max-width: 1400px;
-            margin: 0 auto;
-        }
+@keyframes fadeIn{
+    from{opacity:0;transform:translateY(50px);}
+    to{opacity:1;transform:translateY(0);}
+}
 
-        .couple-card {
-            position: relative;
-            border-radius: 20px;
-            overflow: hidden;
-            box-shadow: 0 20px 40px rgba(255, 20, 147, 0.3);
-            transition: all 0.5s ease;
-            cursor: pointer;
-        }
+/* IMAGENS */
+.couples{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    gap:20px;
+    padding:40px;
+}
 
-        .couple-card:hover {
-            transform: translateY(-15px) scale(1.02);
-            box-shadow: 0 30px 60px rgba(255, 20, 147, 0.5);
-        }
+.card{
+    position:relative;
+    overflow:hidden;
+    border-radius:20px;
+    cursor:pointer;
+}
 
-        .couple-card img {
-            width: 100%;
-            height: 400px;
-            object-fit: cover;
-            transition: transform 0.5s ease;
-        }
+.card img{
+    width:100%;
+    height:350px;
+    object-fit:cover;
+    transition:0.5s;
+}
 
-        .couple-card:hover img {
-            transform: scale(1.1);
-        }
+.card:hover img{
+    transform:scale(1.1);
+}
 
-        .us-text {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            font-family: 'Dancing Script', cursive;
-            font-size: clamp(2rem, 5vw, 4rem);
-            font-weight: 700;
-            color: #fff;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
+.overlay{
+    position:absolute;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%);
+    font-size:3rem;
+    font-family:'Dancing Script';
+    color:white;
+    opacity:0;
+    transition:0.3s;
+}
 
-        .couple-card:hover .us-text {
-            opacity: 1;
-        }
+.card:hover .overlay{
+    opacity:1;
+}
 
-        /* Seção da carta */
-        .letter-section {
-            max-width: 800px;
-            margin: 80px auto;
-            padding: 60px 40px;
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(20px);
-            border-radius: 30px;
-            border: 1px solid rgba(255, 20, 147, 0.3);
-            box-shadow: 0 25px 50px rgba(0,0,0,0.3);
-            text-align: center;
-        }
+/* CARTA */
+.letter{
+    max-width:700px;
+    margin:50px auto;
+    font-size:1.2rem;
+    line-height:1.8;
+    padding:20px;
+}
 
-        .letter-title {
-            font-family: 'Dancing Script', cursive;
-            font-size: clamp(2.5rem, 6vw, 4rem);
-            color: #ff1493;
-            margin-bottom: 30px;
-        }
+/* CORAÇÕES */
+.heart{
+    position:absolute;
+    color:#ff1493;
+    animation:fall linear forwards;
+}
 
-        .letter-text {
-            font-size: 1.2rem;
-            line-height: 1.8;
-            text-align: left;
-            opacity: 0.95;
-            font-weight: 300;
-            white-space: pre-line;
-        }
-
-        .heart {
-            font-size: 3rem;
-            color: #ff1493;
-            margin: 30px 0;
-            animation: heartbeat 1.5s infinite;
-        }
-
-        @keyframes heartbeat {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.2); }
-        }
-
-        /* Responsivo */
-        @media (max-width: 768px) {
-            .couples-section {
-                grid-template-columns: 1fr;
-                padding: 30px 15px;
-            }
-            
-            .letter-section {
-                margin: 50px 20px;
-                padding: 40px 25px;
-            }
-        }
-
-        /* Scroll suave */
-        html {
-            scroll-behavior: smooth;
-        }
-    </style>
+@keyframes fall{
+    to{
+        transform:translateY(100vh);
+        opacity:0;
+    }
+}
+</style>
 </head>
+
 <body>
-    <!-- Animação de pétalas -->
-    <div class="petals" id="petals"></div>
 
-    <!-- Header -->
-    <header class="header">
-        <h1 class="title">Gabrielly & Athila</h1>
-        <p class="subtitle">Para minha mulher especial 🤍</p>
-    </header>
+<!-- TELA INICIAL -->
+<div id="startScreen">
+    <h1>clique para entrar 🤍</h1>
+</div>
 
-    <!-- Seção dos casais -->
-    <section class="couples-section">
-        <div class="couple-card">
-            <img src="https://i.imgur.com/8zK5j2L.jpg" alt="Leon e Ada" loading="lazy">
-            <div class="us-text">US?</div>
-        </div>
-        <div class="couple-card">
-            <img src="https://i.imgur.com/7pQ8mNx.jpg" alt="Escanor e Merlin" loading="lazy">
-            <div class="us-text">US?</div>
-        </div>
-        <div class="couple-card">
-            <img src="https://i.imgur.com/3vR9kWp.jpg" alt="Joe Goldberg e Love Quinn" loading="lazy">
-            <div class="us-text">US?</div>
-        </div>
-    </section>
+<!-- MÚSICA -->
+<audio id="music" loop>
+    <source src="lonelyday.mp3" type="audio/mpeg">
+</audio>
 
-    <!-- Carta -->
-    <section class="letter-section">
-        <h2 class="letter-title">Minha carta para você</h2>
-        <div class="heart">💕</div>
-        <div class="letter-text">
-Quando você fez aquele negócio para mim, fiquei um tempo olhando para a tela, tentando organizar o que passava na minha cabeça
+<!-- CONTEÚDO -->
+<div id="content">
 
-Porque não é todo dia que alguém se abre desse jeito, sabe? Dá um certo peso… mas é um peso bom. Daqueles que fazem a gente perceber que não é algo qualquer.
+<h1 class="name">Gabrielly 💕</h1>
 
-Eu não sei em que momento você virou alguém tão presente pra mim. Só sei que hoje, quando algo acontece, é quase automático pensar "vou contar isso pra ela". E isso diz muito.
+<section class="couples">
+    
+    <div class="card">
+        <img src="https://i.imgur.com/8zK5j2L.jpg">
+        <div class="overlay">US?</div>
+    </div>
 
-Tem dias que eu nem tô tão bem, mas aí aparece uma mensagem sua, ou eu lembro de alguma coisa que a gente conversou, e parece que tudo dá uma suavizada. Como se você tivesse esse jeito de deixar as coisas mais leves sem nem perceber.
+    <div class="card">
+        <img src="https://i.imgur.com/7pQ8mNx.jpg">
+        <div class="overlay">US?</div>
+    </div>
 
-E eu gosto disso na gente… dessa naturalidade. Não parece forçado, não parece complicado. Parece só… certo.
+    <div class="card">
+        <img src="https://i.imgur.com/3vR9kWp.jpg">
+        <div class="overlay">US?</div>
+    </div>
 
-Eu também fico pensando nesse "o que a gente é", mas ao mesmo tempo, não sinto pressa de responder isso. Porque o que a gente tem agora já é bom. Já faz sentido. E, sendo sincero, eu prefiro viver isso do que tentar encaixar em alguma definição.
+</section>
 
-Você é alguém que eu quero por perto. Alguém que eu escolho continuar conhecendo, mesmo sem saber exatamente onde vai dar. E não é dúvida… é só porque eu tô curtindo o caminho.
+<div class="letter">
+Eu não sei explicar exatamente quando você virou tudo isso pra mim…
 
-Eu gosto de você nos detalhes. No jeito que você fala, nas coisas que você presta atenção, no jeito que você se importa. E principalmente, no jeito que você conseguiu chegar em mim sem fazer barulho… mas ficando.
+Mas virou.
 
-E eu fiquei também.
+E hoje, qualquer coisa que acontece no meu dia,
+eu penso em você.
 
-E acho que, no fim, é isso que importa. 🤍
-        </div>
-    </section>
+Você tem esse jeito de deixar tudo mais leve,
+mesmo sem tentar.
 
-    <script>
-        // Criar pétalas
-        function createPetal() {
-            const petal = document.createElement('div');
-            petal.classList.add('petal');
-            petal.style.left = Math.random() * 100 + 'vw';
-            petal.style.animationDuration = (Math.random() * 3 + 4) + 's';
-            petal.style.animationDelay = Math.random() * 2 + 's';
-            document.getElementById('petals').appendChild(petal);
+E no meio de tanta gente passageira…
+você foi alguém que ficou.
 
-            setTimeout(() => {
-                petal.remove();
-            }, 7000);
-        }
+E eu quero continuar.
 
-        // Gerar pétalas continuamente
-        setInterval(createPetal, 300);
+Com você. 🤍
+</div>
 
-        // Carregar mais pétalas no início
-        for(let i = 0; i < 20; i++) {
-            setTimeout(createPetal, i * 100);
-        }
+</div>
 
-        // Efeito parallax no scroll
-        window.addEventListener('scroll', () => {
-            const scrolled = window.pageYOffset;
-            const petals = document.querySelector('.petals');
-            petals.style.transform = `translateY(${scrolled * 0.5}px)`;
-        });
-    </script>
+<script>
+
+// ENTRAR + MÚSICA
+document.getElementById("startScreen").onclick = () => {
+    document.getElementById("startScreen").style.display = "none";
+    document.getElementById("content").style.display = "block";
+
+    const music = document.getElementById("music");
+    music.volume = 0.4;
+    music.play();
+};
+
+// CORAÇÕES
+function createHeart(){
+    const heart = document.createElement("div");
+    heart.classList.add("heart");
+    heart.innerHTML = "💕";
+
+    heart.style.left = Math.random()*100+"vw";
+    heart.style.fontSize = Math.random()*20+20+"px";
+    heart.style.animationDuration = Math.random()*3+3+"s";
+
+    document.body.appendChild(heart);
+
+    setTimeout(()=>heart.remove(),6000);
+}
+
+setInterval(createHeart,200);
+
+</script>
+
 </body>
 </html>
