@@ -1,4 +1,4 @@
-chat apartir de agora vamos trabalhar encima desse codigo aqui ó:<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
@@ -19,29 +19,29 @@ body{
     overflow-x:hidden;
 }
 
+/* fundo */
 @keyframes gradientBG{
     0%{background-position:0% 50%;}
     50%{background-position:100% 50%;}
     100%{background-position:0% 50%;}
 }
 
-/* ⭐ estrelas */
+/* estrelas com leve movimento */
 .star{
     position:fixed;
     width:2px;
     height:2px;
     background:white;
     opacity:0.8;
-    z-index:0;
     animation:twinkle 3s infinite alternate;
 }
 
 @keyframes twinkle{
-    from{opacity:0.2;}
-    to{opacity:1;}
+    from{opacity:0.2; transform:translateY(0);}
+    to{opacity:1; transform:translateY(-3px);}
 }
 
-/* 💕 corações */
+/* coração */
 .heart{
     position:fixed;
     pointer-events:none;
@@ -52,14 +52,14 @@ body{
     to{transform:translateY(100vh);opacity:0;}
 }
 
-/* 🌸 pétalas */
+/* pétalas */
 .petal{
     position:fixed;
     pointer-events:none;
     filter:drop-shadow(0 0 8px pink);
 }
 
-/* tela inicial */
+/* start */
 #startScreen{
     position:fixed;
     width:100%;
@@ -72,7 +72,7 @@ body{
     cursor:pointer;
 }
 
-/* conteúdo */
+/* content */
 #content{
     display:none;
     position:relative;
@@ -88,29 +88,6 @@ body{
     color:#ff85a2;
 }
 
-/* imagens */
-.love-section{
-    margin:60px auto;
-    max-width:700px;
-}
-
-.love-item{
-    margin-bottom:80px;
-}
-
-.love-text{
-    font-family:'Great Vibes';
-    font-size:2.2rem;
-    margin-bottom:20px;
-}
-
-.love-item img{
-    width:100%;
-    max-height:70vh;
-    object-fit:contain;
-    border-radius:15px;
-}
-
 /* texto */
 .letter{
     max-width:700px;
@@ -122,47 +99,62 @@ body{
     min-height:200px;
 }
 
-/* 🔥 SEÇÃO US */
+/* US */
 .us-section{
     max-width:900px;
     margin:60px auto;
     display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-    gap:20px;
+    grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+    gap:15px;
 }
 
+/* card cinematográfico */
 .us-card{
     position:relative;
-    cursor:pointer;
-}
-
-.us-card img{
-    width:100%;
+    height:160px;
+    background:#000;
+    border:1px solid #222;
     border-radius:15px;
+    cursor:pointer;
+    overflow:hidden;
     opacity:0;
-    transform:scale(0.9);
+    transform:translateY(20px) scale(0.95);
     transition:0.6s;
 }
 
+/* aparece um por um */
+.us-card.show{
+    opacity:1;
+    transform:translateY(0) scale(1);
+}
+
+/* texto US? */
 .us-card::before{
     content:"US?";
     position:absolute;
     width:100%;
     height:100%;
-    background:#000;
-    color:#fff;
-    font-family:'Great Vibes';
-    font-size:3rem;
     display:flex;
     justify-content:center;
     align-items:center;
-    border-radius:15px;
-    transition:0.6s;
+    font-family:'Great Vibes';
+    font-size:2.5rem;
+    color:#fff;
+    transition:0.5s;
 }
 
+/* imagem */
+.us-card img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    opacity:0;
+    transition:0.5s;
+}
+
+/* reveal */
 .us-card.active img{
     opacity:1;
-    transform:scale(1);
 }
 
 .us-card.active::before{
@@ -182,7 +174,7 @@ body{
 .final.active{
     opacity:1;
     transform:scale(1.2);
-    text-shadow:0 0 20px #ff4d6d;
+    text-shadow:0 0 25px #ff4d6d;
 }
 
 /* botão música */
@@ -212,26 +204,8 @@ body{
 
 <h1 class="name">Gabrielly 💕</h1>
 
-<section class="love-section">
-<div class="love-item">
-<div class="love-text">Eu amo você como o Joe ama a Love</div>
-<img src="amm.jpg">
-</div>
-
-<div class="love-item">
-<div class="love-text">Eu amo você como o Leon ama a Ada</div>
-<img src="aa.jpg.jfif">
-</div>
-
-<div class="love-item">
-<div class="love-text">Eu amo você como o Escanor ama a Merlin</div>
-<img src="cc.jpg.jfif">
-</div>
-</section>
-
 <div class="letter" id="typing"></div>
 
-<!-- 🔥 NOVA PARTE -->
 <section class="us-section">
 
 <div class="us-card"><img src="amm.jpg"></div>
@@ -252,7 +226,7 @@ body{
 
 <script>
 
-// estrelas
+/* estrelas */
 for(let i=0;i<120;i++){
 let s=document.createElement("div");
 s.classList.add("star");
@@ -261,43 +235,69 @@ s.style.left=Math.random()*100+"vw";
 document.body.appendChild(s);
 }
 
-// texto completo
-const text=`Depois que eu vi aquilo que vc fez pra mim, eu fiquei um tempo olhando pra tela...
+/* TEXTO COMPLETO (EXATO COMO VOCÊ MANDOU) */
+const text = `Depois que eu vi aquilo que vc fez pra mim, eu fiquei um tempo olhando pra tela depois de terminar de ler…
 
 Não foi só por ler… foi porque eu senti cada palavra.
 
-Eu não sei em que momento você virou alguém tão presente pra mim.
+É estranho explicar, mas parecia que enquanto eu lia, eu tava revivendo tudo… cada conversa, cada momento simples que acabou ficando importante sem a gente nem perceber.
 
-Hoje qualquer coisa que acontece eu penso em você.
+Eu não sei em que momento você virou alguém tão presente pra mim. Só sei que hoje, qualquer coisa que acontece, é automático pensar em você.
 
-E eu quero continuar com voce até o fim. 🤍`;
+Tipo “preciso contar isso pra ela”.
 
-let i=0, started=false;
+Tem dias que eu nem tô tão bem, mas aí lembro de você… e parece que tudo fica mais leve.
+
+Você tem esse jeito de acalmar as coisas dentro de mim sem nem tentar.
+
+E eu gosto disso na gente.
+
+Gosto de como é leve… mas ao mesmo tempo tão intenso.
+
+Sem pressão, sem pressa, sem precisar definir tudo.
+
+Só sendo.
+
+E sendo algo bom.
+
+Eu tambem não sei exatamente onde isso vai dar…
+
+Mas sei que eu quero continuar com voce até o fim.
+
+Sem pressa… mas só nós dois, do nosso jeito. 🤍`;
+
+let i = 0;
+let started = false;
 
 function typing(){
-if(i<text.length){
-document.getElementById("typing").innerHTML+=text.charAt(i);
+if(i < text.length){
+document.getElementById("typing").innerHTML += text.charAt(i);
 i++;
-setTimeout(typing,30);
+
+/* pausas emocionais */
+let delay = 18;
+if(text.charAt(i) === "…") delay = 120;
+if(text.charAt(i) === ".") delay = 60;
+
+setTimeout(typing, delay);
+
 }else{
 document.getElementById("finalText").classList.add("active");
+revealUS();
 }
 }
 
-window.addEventListener("scroll",()=>{
-let pos=document.getElementById("typing").getBoundingClientRect().top;
-if(pos<window.innerHeight-100 && !started){
-started=true;
-typing();
-}
+/* US cinematográfico (um por um) */
+function revealUS(){
+const cards = document.querySelectorAll(".us-card");
+cards.forEach((c, i)=>{
+setTimeout(()=>{
+c.classList.add("show");
+}, i * 400);
 });
+}
 
-// revelar fotos
-document.querySelectorAll(".us-card").forEach(card=>{
-card.onclick=()=>card.classList.add("active");
-});
-
-// entrada
+/* start */
 document.getElementById("startScreen").onclick=()=>{
 document.getElementById("startScreen").style.display="none";
 document.getElementById("content").style.display="block";
@@ -312,48 +312,20 @@ if(v<0.4){v+=0.02;m.volume=v;}
 else clearInterval(fade);
 },200);
 
-for(let i=0;i<50;i++) createExplosionPetal();
+typing();
 };
 
-// botão música
+/* US click */
+document.querySelectorAll(".us-card").forEach(card=>{
+card.onclick=()=>card.classList.toggle("active");
+});
+
+/* música */
 document.getElementById("musicBtn").onclick=()=>{
 let m=document.getElementById("music");
 m.paused?m.play():m.pause();
 };
 
-// corações
-setInterval(()=>{
-let h=document.createElement("div");
-h.innerHTML="💕";
-h.classList.add("heart");
-h.style.left=Math.random()*100+"vw";
-h.style.fontSize=(Math.random()*20+15)+"px";
-h.style.animationDuration=(Math.random()*4+4)+"s";
-document.body.appendChild(h);
-setTimeout(()=>h.remove(),7000);
-},300);
-
-// explosão
-function createExplosionPetal(){
-let p=document.createElement("div");
-p.innerHTML="🌸";
-p.classList.add("petal");
-p.style.left="50%";
-p.style.top="50%";
-p.style.fontSize=(Math.random()*20+15)+"px";
-
-document.body.appendChild(p);
-
-let a=Math.random()*2*Math.PI;
-let d=Math.random()*400+200;
-
-p.animate([
-{transform:"translate(0,0)",opacity:1},
-{transform:`translate(${Math.cos(a)*d}px,${Math.sin(a)*d}px)`,opacity:0}
-],{duration:1500});
-
-setTimeout(()=>p.remove(),1500);
-}
 </script>
 
 </body>
