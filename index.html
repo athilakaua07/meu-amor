@@ -26,9 +26,32 @@ body{
     animation:fall linear forwards;
 }
 
+/* PÉTALAS */
+.petal{
+    position:fixed;
+    width:15px;
+    height:15px;
+    background:#ff85a2;
+    border-radius:50% 0 50% 50%;
+    transform:rotate(45deg);
+    z-index:0;
+    animation:rise linear forwards;
+}
+
 @keyframes fall{
     to{
         transform:translateY(100vh);
+        opacity:0;
+    }
+}
+
+@keyframes rise{
+    from{
+        transform:translateY(100vh) rotate(0deg);
+        opacity:1;
+    }
+    to{
+        transform:translateY(-100px) rotate(360deg);
         opacity:0;
     }
 }
@@ -75,17 +98,17 @@ body{
 
 /* ITEM */
 .love-item{
-    margin-bottom:50px;
+    margin-bottom:60px;
 }
 
 /* TEXTO */
 .love-text{
     font-family:'Great Vibes';
-    font-size:2rem;
+    font-size:2.2rem;
     margin-bottom:15px;
 }
 
-/* IMAGEM COM EFEITO */
+/* IMAGEM */
 .love-item img{
     width:100%;
     max-height:250px;
@@ -109,7 +132,7 @@ body{
     text-align:left;
 }
 
-/* ANIMAÇÃO AO DESCER */
+/* ANIMAÇÃO */
 .reveal{
     opacity:0;
     transform:translateY(40px);
@@ -152,23 +175,18 @@ body{
 <section class="love-section">
 
 <div class="love-item reveal">
-    <div class="love-text">Amo você como Leon ama Ada</div>
-    <img src="leon.jpg">
+    <div class="love-text">Eu amo você como o Joe ama a Love</div>
+    <img src="joe.jpg">
 </div>
 
 <div class="love-item reveal">
-    <div class="love-text">Amo você como eu penso em você todos os dias</div>
-    <img src="bob.jpg">
-</div>
-
-<div class="love-item reveal">
-    <div class="love-text">Amo vc como o joe ama a love </div>
+    <div class="love-text">Eu amo você como o Leon ama a Ada</div>
     <img src="aa.jpg">
 </div>
 
 <div class="love-item reveal">
-    <div class="love-text">Amo você como o leon ama a ada </div>
-    <img src="bb.jpg.jfif">
+    <div class="love-text">Eu amo você como o Escanor ama a Merlin</div>
+    <img src="cc.jpg">
 </div>
 
 </section>
@@ -202,8 +220,6 @@ Eu tambem não sei exatamente onde isso vai dar…
 
 Mas sei que eu quero continuar com voce até o fim.
 
-Quero continuar assim.
-
 Sem pressa… mas só nós dois, do nosso jeito. 🤍
 </div>
 
@@ -233,10 +249,23 @@ function createHeart(){
 
     setTimeout(()=>heart.remove(),7000);
 }
-
 setInterval(createHeart,300);
 
-// ANIMAÇÃO AO DESCER
+// PÉTALAS SUBINDO
+function createPetal(){
+    const petal = document.createElement("div");
+    petal.classList.add("petal");
+
+    petal.style.left = Math.random()*100+"vw";
+    petal.style.animationDuration = Math.random()*3+4+"s";
+
+    document.body.appendChild(petal);
+
+    setTimeout(()=>petal.remove(),6000);
+}
+setInterval(createPetal,200);
+
+// ANIMAÇÃO
 function revealOnScroll(){
     const elements = document.querySelectorAll('.reveal, .final');
 
@@ -251,6 +280,7 @@ function revealOnScroll(){
 }
 
 window.addEventListener('scroll', revealOnScroll);
+window.addEventListener('load', revealOnScroll);
 
 </script>
 
