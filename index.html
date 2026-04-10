@@ -26,7 +26,7 @@ body{
     animation:fall linear forwards;
 }
 
-/* 🌸 PÉTALAS VISÍVEIS */
+/* PÉTALAS */
 .petal{
     position:fixed;
     pointer-events:none;
@@ -212,15 +212,25 @@ Sem pressa… mas só nós dois, do nosso jeito. 🤍
 
 </div>
 
+<!-- 🎵 MÚSICA -->
+<audio id="music" loop>
+<source src="Arctic Monkeys - Do I Wanna Know_ (Lyrics) [PUL2mVdt3xo].mp3" type="audio/mp3">
+</audio>
+
 <script>
 
-// 💥 ENTRAR COM EXPLOSÃO
+// 💥 ENTRAR COM EXPLOSÃO + MÚSICA
 document.getElementById("startScreen").onclick = () => {
 
     const start = document.getElementById("startScreen");
     const content = document.getElementById("content");
+    const music = document.getElementById("music");
 
-    // explosão de pétalas
+    // tocar música
+    music.volume = 0.4;
+    music.play();
+
+    // explosão
     for(let i = 0; i < 50; i++){
         createExplosionPetal();
     }
@@ -234,8 +244,8 @@ document.getElementById("startScreen").onclick = () => {
 // CORAÇÕES
 function createHeart(){
     const heart = document.createElement("div");
-    heart.classList.add("heart");
     heart.innerHTML = "💕";
+    heart.classList.add("heart");
 
     heart.style.left = Math.random()*100+"vw";
     heart.style.fontSize = Math.random()*20+15+"px";
@@ -247,12 +257,11 @@ function createHeart(){
 }
 setInterval(createHeart,300);
 
-// 🌸 EXPLOSÃO REAL DE PÉTALAS
+// 🌸 EXPLOSÃO
 function createExplosionPetal(){
     const petal = document.createElement("div");
-    petal.classList.add("petal");
-
     petal.innerHTML = "🌸";
+    petal.classList.add("petal");
 
     petal.style.left = "50%";
     petal.style.top = "50%";
@@ -267,8 +276,8 @@ function createExplosionPetal(){
     const y = Math.sin(angle) * distance - 300;
 
     petal.animate([
-        { transform: "translate(0,0) rotate(0deg)", opacity: 1 },
-        { transform: `translate(${x}px, ${y}px) rotate(720deg)`, opacity: 0 }
+        { transform: "translate(0,0)", opacity: 1 },
+        { transform: `translate(${x}px, ${y}px)`, opacity: 0 }
     ], {
         duration: 1500,
         easing: "ease-out"
