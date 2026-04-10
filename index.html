@@ -69,7 +69,7 @@ body{
     color:#ff85a2;
 }
 
-/* 💖 topo */
+/* topo */
 .love-section{
     margin:60px auto;
     max-width:700px;
@@ -112,6 +112,7 @@ body{
     gap:15px;
 }
 
+/* cards */
 .us-card{
     position:relative;
     height:160px;
@@ -218,20 +219,15 @@ body{
 
 <div class="letter" id="typing"></div>
 
-<!-- US -->
+<!-- US COM SUAS FOTOS -->
 <section class="us-section">
 
-<div class="us-card"><img src="amm.jpg"></div>
-<div class="us-card"><img src="aa.jpg.jfif"></div>
-<div class="us-card"><img src="cc.jpg.jfif"></div>
-<div class="us-card"><img src="amm.jpg"></div>
-<div class="us-card"><img src="aa.jpg.jfif"></div>
-<div class="us-card"><img src="cc.jpg.jfif"></div>
-<div class="us-card"><img src="amm.jpg"></div>
-<div class="us-card"><img src="aa.jpg.jfif"></div>
-<div class="us-card"><img src="cc.jpg.jfif"></div>
-<div class="us-card"><img src="amm.jpg"></div>
-<div class="us-card"><img src="aa.jpg.jfif"></div>
+<div class="us-card"><img src="kira.jpg"></div>
+<div class="us-card"><img src="rise.jpg"></div>
+<div class="us-card"><img src="ban.jfif"></div>
+<div class="us-card"><img src="download (1).jfif"></div>
+<div class="us-card"><img src="Merlin x Escanor.jfif"></div>
+<div class="us-card"><img src="util.jpg"></div>
 
 </section>
 
@@ -239,9 +235,9 @@ body{
 
 </div>
 
-<!-- 🎵 MÚSICA -->
+<!-- música -->
 <audio id="music" loop>
-<source src="Arctic Monkeys - Do I Wanna Know_ (Lyrics) [PUL2mVdt3xo].mp3" type="audio/mp3">
+<source src="Arctic Monkeys - Do I Wanna Know_ (Lyrics) [PUL2mVdt3xo].mp3">
 </audio>
 
 <button class="music-btn" id="musicBtn">🔊</button>
@@ -257,7 +253,7 @@ s.style.left=Math.random()*100+"vw";
 document.body.appendChild(s);
 }
 
-/* TEXTO */
+/* texto completo */
 const text = `Depois que eu vi aquilo que vc fez pra mim, eu fiquei um tempo olhando pra tela depois de terminar de ler…
 
 Não foi só por ler… foi porque eu senti cada palavra.
@@ -312,7 +308,7 @@ c.classList.add("show");
 });
 }
 
-/* START */
+/* start */
 document.getElementById("startScreen").onclick=()=>{
 document.getElementById("startScreen").style.display="none";
 document.getElementById("content").style.display="block";
@@ -332,7 +328,7 @@ if(v<0.4){v+=0.02;m.volume=v;}
 else clearInterval(fade);
 },200);
 
-/* inicia texto */
+/* texto */
 typing();
 };
 
@@ -341,7 +337,7 @@ document.querySelectorAll(".us-card").forEach(card=>{
 card.onclick=()=>card.classList.toggle("active");
 });
 
-/* botão música */
+/* música botão */
 document.getElementById("musicBtn").onclick=()=>{
 let m=document.getElementById("music");
 m.paused ? m.play() : m.pause();
