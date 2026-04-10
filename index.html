@@ -19,11 +19,27 @@ body{
     overflow-x:hidden;
 }
 
-/* 🌈 FUNDO ANIMADO */
+/* 🌈 FUNDO */
 @keyframes gradientBG{
     0%{background-position:0% 50%;}
     50%{background-position:100% 50%;}
     100%{background-position:0% 50%;}
+}
+
+/* ⭐ ESTRELAS */
+.star{
+    position:fixed;
+    width:2px;
+    height:2px;
+    background:white;
+    opacity:0.8;
+    z-index:0;
+    animation:twinkle 3s infinite alternate;
+}
+
+@keyframes twinkle{
+    from{opacity:0.2;}
+    to{opacity:1;}
 }
 
 /* 💕 CORAÇÕES */
@@ -38,7 +54,7 @@ body{
     to{transform:translateY(100vh);opacity:0;}
 }
 
-/* 🌸 PÉTALAS COM BRILHO */
+/* 🌸 PÉTALAS */
 .petal{
     position:fixed;
     pointer-events:none;
@@ -77,13 +93,6 @@ body{
     font-family:'Great Vibes';
     font-size:4rem;
     color:#ff85a2;
-    animation:fadeIn 2s ease;
-}
-
-/* TRANSIÇÃO */
-@keyframes fadeIn{
-    from{opacity:0;transform:translateY(20px);}
-    to{opacity:1;}
 }
 
 /* SEÇÃO */
@@ -125,7 +134,7 @@ body{
     min-height:200px;
 }
 
-/* FINAL 💥 */
+/* FINAL */
 .final{
     font-family:'Great Vibes';
     font-size:3.5rem;
@@ -142,7 +151,7 @@ body{
     text-shadow:0 0 20px #ff4d6d;
 }
 
-/* BOTÃO MÚSICA */
+/* BOTÃO */
 .music-btn{
     position:fixed;
     bottom:20px;
@@ -195,7 +204,6 @@ body{
 
 </div>
 
-<!-- 🎵 MÚSICA -->
 <audio id="music" loop>
 <source src="Arctic Monkeys - Do I Wanna Know_ (Lyrics) [PUL2mVdt3xo].mp3">
 </audio>
@@ -204,16 +212,27 @@ body{
 
 <script>
 
-// TEXTO DIGITANDO
-const text = `Depois que eu vi aquilo que vc fez pra mim, eu fiquei um tempo olhando pra tela...
+// ⭐ CRIAR ESTRELAS
+for(let i=0;i<120;i++){
+    const star=document.createElement("div");
+    star.classList.add("star");
+    star.style.top=Math.random()*100+"vh";
+    star.style.left=Math.random()*100+"vw";
+    document.body.appendChild(star);
+}
 
-Não foi só por ler… foi porque eu senti cada palavra.
+// TEXTO
+const text = `Depois que eu vi aquilo que vc fez pra mim...
 
-Eu não sei em que momento você virou alguém tão presente pra mim...
+Eu senti cada palavra.
 
-Mas sei que eu quero continuar com voce até o fim. 🤍`;
+Você virou alguém muito importante pra mim.
 
-let i = 0;
+E eu quero continuar com você até o fim. 🤍`;
+
+let i=0;
+let started=false;
+
 function typing(){
     if(i < text.length){
         document.getElementById("typing").innerHTML += text.charAt(i);
@@ -224,27 +243,32 @@ function typing(){
     }
 }
 
+// SCROLL ATIVA TEXTO
+window.addEventListener("scroll",()=>{
+    const letter=document.getElementById("typing");
+    const pos=letter.getBoundingClientRect().top;
+
+    if(pos < window.innerHeight - 100 && !started){
+        started=true;
+        typing();
+    }
+});
+
 // ENTRADA
 document.getElementById("startScreen").onclick = () => {
 
     document.getElementById("startScreen").style.display="none";
     document.getElementById("content").style.display="block";
 
-    document.getElementById("music").volume=0;
-    document.getElementById("music").play();
+    const music=document.getElementById("music");
+    music.volume=0;
+    music.play();
 
-    // fade-in música
-    let vol = 0;
-    const fade = setInterval(()=>{
-        if(vol < 0.4){
-            vol += 0.02;
-            document.getElementById("music").volume = vol;
-        }else{
-            clearInterval(fade);
-        }
+    let v=0;
+    const fade=setInterval(()=>{
+        if(v<0.4){v+=0.02;music.volume=v;}
+        else clearInterval(fade);
     },200);
-
-    typing();
 
     for(let i=0;i<50;i++){
         createExplosionPetal();
@@ -252,18 +276,14 @@ document.getElementById("startScreen").onclick = () => {
 };
 
 // BOTÃO MÚSICA
-const music = document.getElementById("music");
-document.getElementById("musicBtn").onclick = ()=>{
-    if(music.paused){
-        music.play();
-    }else{
-        music.pause();
-    }
+document.getElementById("musicBtn").onclick=()=>{
+    const m=document.getElementById("music");
+    m.paused?m.play():m.pause();
 };
 
 // CORAÇÕES
 setInterval(()=>{
-    const h = document.createElement("div");
+    const h=document.createElement("div");
     h.innerHTML="💕";
     h.classList.add("heart");
     h.style.left=Math.random()*100+"vw";
@@ -273,7 +293,7 @@ setInterval(()=>{
     setTimeout(()=>h.remove(),7000);
 },300);
 
-// EXPLOSÃO 🌸
+// EXPLOSÃO
 function createExplosionPetal(){
     const p=document.createElement("div");
     p.innerHTML="🌸";
@@ -284,12 +304,12 @@ function createExplosionPetal(){
 
     document.body.appendChild(p);
 
-    const angle=Math.random()*2*Math.PI;
-    const dist=Math.random()*400+200;
+    const a=Math.random()*2*Math.PI;
+    const d=Math.random()*400+200;
 
     p.animate([
         {transform:"translate(0,0)",opacity:1},
-        {transform:`translate(${Math.cos(angle)*dist}px,${Math.sin(angle)*dist}px)`,opacity:0}
+        {transform:`translate(${Math.cos(a)*d}px,${Math.sin(a)*d}px)`,opacity:0}
     ],{duration:1500});
 
     setTimeout(()=>p.remove(),1500);
