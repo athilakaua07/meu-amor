@@ -17,7 +17,7 @@ body{
     overflow-x:hidden;
 }
 
-/* CORAÇÕES (AGORA NO FUNDO) */
+/* CORAÇÕES */
 .heart{
     position:fixed;
     color:#ff4d6d;
@@ -104,15 +104,10 @@ body{
     <h1>clique para entrar 🤍</h1>
 </div>
 
-<audio id="music" loop>
-    <source src="lonelyday.mp3" type="audio/mpeg">
-</audio>
-
 <div id="content">
 
 <h1 class="name">Gabrielly 💕</h1>
 
-<!-- SEQUÊNCIA DE AMOR -->
 <section class="love-section">
 
 <div class="love-item">
@@ -149,17 +144,13 @@ E eu só sei que quero continuar com você. 🤍
 
 <script>
 
-// ENTRAR + MÚSICA
+// ENTRAR
 document.getElementById("startScreen").onclick = () => {
     document.getElementById("startScreen").style.display = "none";
     document.getElementById("content").style.display = "block";
-
-    const music = document.getElementById("music");
-    music.volume = 0.4;
-    music.play();
 };
 
-// CORAÇÕES NO FUNDO
+// CORAÇÕES
 function createHeart(){
     const heart = document.createElement("div");
     heart.classList.add("heart");
