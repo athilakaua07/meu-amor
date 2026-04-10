@@ -26,32 +26,17 @@ body{
     animation:fall linear forwards;
 }
 
-/* PÉTALAS */
+/* 🌸 PÉTALAS VISÍVEIS */
 .petal{
     position:fixed;
-    width:15px;
-    height:15px;
-    background:#ff85a2;
-    border-radius:50% 0 50% 50%;
-    transform:rotate(45deg);
-    z-index:0;
-    animation:rise linear forwards;
+    pointer-events:none;
+    z-index:1;
 }
 
+/* animação coração */
 @keyframes fall{
     to{
         transform:translateY(100vh);
-        opacity:0;
-    }
-}
-
-@keyframes rise{
-    from{
-        transform:translateY(100vh);
-        opacity:1;
-    }
-    to{
-        transform:translateY(-100px) rotate(360deg);
         opacity:0;
     }
 }
@@ -236,7 +221,7 @@ document.getElementById("startScreen").onclick = () => {
     const content = document.getElementById("content");
 
     // explosão de pétalas
-    for(let i = 0; i < 40; i++){
+    for(let i = 0; i < 50; i++){
         createExplosionPetal();
     }
 
@@ -262,43 +247,34 @@ function createHeart(){
 }
 setInterval(createHeart,300);
 
-// PÉTALAS CONTÍNUAS
-function createPetal(){
-    const petal = document.createElement("div");
-    petal.classList.add("petal");
-
-    petal.style.left = Math.random()*100+"vw";
-    petal.style.animationDuration = Math.random()*3+4+"s";
-
-    document.body.appendChild(petal);
-
-    setTimeout(()=>petal.remove(),6000);
-}
-setInterval(createPetal,200);
-
-// 💥 EXPLOSÃO
+// 🌸 EXPLOSÃO REAL DE PÉTALAS
 function createExplosionPetal(){
     const petal = document.createElement("div");
     petal.classList.add("petal");
 
-    petal.style.left = "50vw";
-    petal.style.top = "50vh";
+    petal.innerHTML = "🌸";
 
-    const x = (Math.random() - 0.5) * 600;
-    const y = (Math.random() - 1) * 800;
-
-    petal.style.transition = "transform 1.5s ease-out, opacity 1.5s";
+    petal.style.left = "50%";
+    petal.style.top = "50%";
+    petal.style.fontSize = (Math.random()*15+15)+"px";
 
     document.body.appendChild(petal);
 
-    setTimeout(()=>{
-        petal.style.transform = `translate(${x}px, ${y}px) rotate(720deg)`;
-        petal.style.opacity = "0";
-    },10);
+    const angle = Math.random() * 2 * Math.PI;
+    const distance = Math.random() * 400 + 200;
 
-    setTimeout(()=>{
-        petal.remove();
-    },1500);
+    const x = Math.cos(angle) * distance;
+    const y = Math.sin(angle) * distance - 300;
+
+    petal.animate([
+        { transform: "translate(0,0) rotate(0deg)", opacity: 1 },
+        { transform: `translate(${x}px, ${y}px) rotate(720deg)`, opacity: 0 }
+    ], {
+        duration: 1500,
+        easing: "ease-out"
+    });
+
+    setTimeout(()=> petal.remove(),1500);
 }
 
 // ANIMAÇÃO SCROLL
