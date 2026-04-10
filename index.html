@@ -1,130 +1,275 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<title>Texto + US animado</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Para Gabrielly 🤍</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;400&display=swap" rel="stylesheet">
 
 <style>
+*{margin:0;padding:0;box-sizing:border-box;}
+
 body{
-  margin:0;
-  background:#0f0f0f;
-  color:white;
-  font-family: Arial, Helvetica, sans-serif;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  min-height:100vh;
+    font-family:'Poppins',sans-serif;
+    background:linear-gradient(-45deg,#8b0000,#2d0000,#000,#4b0000);
+    background-size:400% 400%;
+    animation:gradientBG 10s ease infinite;
+    color:#fff;
+    overflow-x:hidden;
 }
 
-.container{
-  width:80%;
-  max-width:800px;
+@keyframes gradientBG{
+    0%{background-position:0% 50%;}
+    50%{background-position:100% 50%;}
+    100%{background-position:0% 50%;}
 }
 
-/* TEXTO */
-#texto{
-  font-size:18px;
-  line-height:1.6;
-  white-space:pre-wrap;
-  word-wrap:break-word;
+/* estrelas */
+.star{
+    position:fixed;
+    width:2px;
+    height:2px;
+    background:white;
+    opacity:0.8;
+    z-index:0;
+    animation:twinkle 3s infinite alternate;
 }
 
-/* US */
-.us-container{
-  margin-top:30px;
-  display:grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap:15px;
+@keyframes twinkle{
+    from{opacity:0.2;}
+    to{opacity:1;}
 }
 
-/* BOX */
-.us-box{
-  background:#000;
-  border:1px solid #444;
-  height:120px;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  font-weight:bold;
-  color:#aaa;
-  border-radius:10px;
-
-  opacity:0;
-  transform: translateY(20px);
-  position:relative;
-  overflow:hidden;
+/* corações */
+.heart{
+    position:fixed;
+    pointer-events:none;
+    animation:fall linear forwards;
 }
 
-/* entrada */
-.us-box.show{
-  animation: aparecer 0.6s ease forwards;
+@keyframes fall{
+    to{transform:translateY(100vh);opacity:0;}
 }
 
-/* glitch nos US */
-.us-box.show::before,
-.us-box.show::after{
-  content:"";
-  position:absolute;
-  top:0;
-  left:0;
-  width:100%;
-  height:100%;
-  opacity:0;
+/* pétalas */
+.petal{
+    position:fixed;
+    pointer-events:none;
+    filter:drop-shadow(0 0 8px pink);
 }
 
-.us-box.show::before{
-  background:#ff00ff;
-  animation: glitch 1.2s infinite;
-  mix-blend-mode:screen;
+/* start */
+#startScreen{
+    position:fixed;
+    width:100%;
+    height:100%;
+    background:#000;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    z-index:9999;
+    cursor:pointer;
 }
 
-.us-box.show::after{
-  background:#00ffff;
-  animation: glitch 0.9s infinite;
-  mix-blend-mode:screen;
+/* content */
+#content{
+    display:none;
+    position:relative;
+    z-index:2;
+    text-align:center;
 }
 
-@keyframes aparecer{
-  from{
+.name{
+    margin-top:60px;
+    font-family:'Great Vibes';
+    font-size:4rem;
+    color:#ff85a2;
+}
+
+/* imagens */
+.love-section{
+    margin:60px auto;
+    max-width:700px;
+}
+
+.love-item{
+    margin-bottom:80px;
+}
+
+.love-text{
+    font-family:'Great Vibes';
+    font-size:2.2rem;
+    margin-bottom:20px;
+}
+
+.love-item img{
+    width:100%;
+    max-height:70vh;
+    object-fit:contain;
+    border-radius:15px;
+}
+
+/* texto */
+.letter{
+    max-width:700px;
+    margin:80px auto;
+    font-size:1.1rem;
+    line-height:1.8;
+    padding:20px;
+    text-align:left;
+    min-height:200px;
+}
+
+/* US SECTION */
+.us-section{
+    max-width:900px;
+    margin:60px auto;
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
+    gap:15px;
+}
+
+/* CARD PRETO */
+.us-card{
+    position:relative;
+    height:180px;
+    background:#000;
+    border:1px solid #333;
+    border-radius:15px;
+    cursor:pointer;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    overflow:hidden;
+}
+
+/* TEXTO US? */
+.us-card::before{
+    content:"US?";
+    position:absolute;
+    font-family:'Great Vibes';
+    font-size:2.5rem;
+    color:#fff;
+    transition:0.4s;
+}
+
+/* IMAGEM */
+.us-card img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
     opacity:0;
-    transform: translateY(20px);
-  }
-  to{
+    transition:0.5s;
+}
+
+/* REVELAR */
+.us-card.active img{
     opacity:1;
-    transform: translateY(0);
-  }
 }
 
-@keyframes glitch{
-  0%{transform:translate(0); opacity:0.2;}
-  20%{transform:translate(-2px,2px);}
-  40%{transform:translate(2px,-2px);}
-  60%{transform:translate(-1px,1px);}
-  80%{transform:translate(1px,-1px);}
-  100%{transform:translate(0); opacity:0;}
+.us-card.active::before{
+    opacity:0;
 }
 
+/* final */
+.final{
+    font-family:'Great Vibes';
+    font-size:3.5rem;
+    margin:120px 0;
+    opacity:0;
+    transform:scale(0.5);
+    transition:1s;
+}
+
+.final.active{
+    opacity:1;
+    transform:scale(1.2);
+    text-shadow:0 0 20px #ff4d6d;
+}
+
+/* botão música */
+.music-btn{
+    position:fixed;
+    bottom:20px;
+    right:20px;
+    background:#ff4d6d;
+    border:none;
+    border-radius:50%;
+    width:50px;
+    height:50px;
+    color:#fff;
+    font-size:20px;
+    cursor:pointer;
+}
 </style>
 </head>
 
 <body>
 
-<div class="container">
+<div id="startScreen">
+<h1>clique para entrar 🤍</h1>
+</div>
 
-  <div id="texto"></div>
+<div id="content">
 
-  <div class="us-container">
-    <div class="us-box">US SLOT 1</div>
-    <div class="us-box">US SLOT 2</div>
-    <div class="us-box">US SLOT 3</div>
-    <div class="us-box">US SLOT 4</div>
-  </div>
+<h1 class="name">Gabrielly 💕</h1>
+
+<section class="love-section">
+<div class="love-item">
+<div class="love-text">Eu amo você como o Joe ama a Love</div>
+<img src="amm.jpg">
+</div>
+
+<div class="love-item">
+<div class="love-text">Eu amo você como o Leon ama a Ada</div>
+<img src="aa.jpg.jfif">
+</div>
+
+<div class="love-item">
+<div class="love-text">Eu amo você como o Escanor ama a Merlin</div>
+<img src="cc.jpg.jfif">
+</div>
+</section>
+
+<div class="letter" id="typing"></div>
+
+<!-- US 7 SLOTS -->
+<section class="us-section">
+
+<div class="us-card"><img src="img1.jpg"></div>
+<div class="us-card"><img src="img2.jpg"></div>
+<div class="us-card"><img src="img3.jpg"></div>
+<div class="us-card"><img src="img4.jpg"></div>
+<div class="us-card"><img src="img5.jpg"></div>
+<div class="us-card"><img src="img6.jpg"></div>
+<div class="us-card"><img src="img7.jpg"></div>
+
+</section>
+
+<div class="final" id="finalText">Eu te amo Gabrielly 💕</div>
 
 </div>
 
+<audio id="music" loop>
+<source src="Arctic Monkeys - Do I Wanna Know_ (Lyrics) [PUL2mVdt3xo].mp3">
+</audio>
+
+<button class="music-btn" id="musicBtn">🔊</button>
+
 <script>
 
-const textoCompleto = `Depois que eu vi aquilo que vc fez pra mim, eu fiquei um tempo olhando pra tela depois de terminar de ler…
+/* estrelas */
+for(let i=0;i<120;i++){
+let s=document.createElement("div");
+s.classList.add("star");
+s.style.top=Math.random()*100+"vh";
+s.style.left=Math.random()*100+"vw";
+document.body.appendChild(s);
+}
+
+/* TEXTO COMPLETO */
+const text=`Depois que eu vi aquilo que vc fez pra mim, eu fiquei um tempo olhando pra tela depois de terminar de ler…
 
 Não foi só por ler… foi porque eu senti cada palavra.
 
@@ -152,32 +297,90 @@ Eu tambem não sei exatamente onde isso vai dar…
 
 Mas sei que eu quero continuar com voce até o fim.
 
-Sem pressa… mas só nós dois, do nosso jeito. 🤍`
+Sem pressa… mas só nós dois, do nosso jeito. 🤍`;
 
-const textoEl = document.getElementById("texto");
-const usBoxes = document.querySelectorAll(".us-box");
+let i=0, started=false;
 
-let i = 0;
-
-function digitar(){
-  if(i < textoCompleto.length){
-    textoEl.innerHTML += textoCompleto.charAt(i);
-    i++;
-    setTimeout(digitar, 18);
-  } else {
-    mostrarUS();
-  }
+function typing(){
+if(i<text.length){
+document.getElementById("typing").innerHTML+=text.charAt(i);
+i++;
+setTimeout(typing,30);
+}else{
+document.getElementById("finalText").classList.add("active");
+}
 }
 
-function mostrarUS(){
-  usBoxes.forEach((box, index) => {
-    setTimeout(() => {
-      box.classList.add("show");
-    }, index * 300);
-  });
+window.addEventListener("scroll",()=>{
+let pos=document.getElementById("typing").getBoundingClientRect().top;
+if(pos<window.innerHeight-100 && !started){
+started=true;
+typing();
 }
+});
 
-digitar();
+/* revelar US */
+document.querySelectorAll(".us-card").forEach(card=>{
+card.onclick=()=>card.classList.toggle("active");
+});
+
+/* start */
+document.getElementById("startScreen").onclick=()=>{
+document.getElementById("startScreen").style.display="none";
+document.getElementById("content").style.display="block";
+
+let m=document.getElementById("music");
+m.volume=0;
+m.play();
+
+let v=0;
+let fade=setInterval(()=>{
+if(v<0.4){v+=0.02;m.volume=v;}
+else clearInterval(fade);
+},200);
+
+for(let i=0;i<50;i++) createExplosionPetal();
+};
+
+/* música */
+document.getElementById("musicBtn").onclick=()=>{
+let m=document.getElementById("music");
+m.paused?m.play():m.pause();
+};
+
+/* corações */
+setInterval(()=>{
+let h=document.createElement("div");
+h.innerHTML="💕";
+h.classList.add("heart");
+h.style.left=Math.random()*100+"vw";
+h.style.fontSize=(Math.random()*20+15)+"px";
+h.style.animationDuration=(Math.random()*4+4)+"s";
+document.body.appendChild(h);
+setTimeout(()=>h.remove(),7000);
+},300);
+
+/* pétalas */
+function createExplosionPetal(){
+let p=document.createElement("div");
+p.innerHTML="🌸";
+p.classList.add("petal");
+p.style.left="50%";
+p.style.top="50%";
+p.style.fontSize=(Math.random()*20+15)+"px";
+
+document.body.appendChild(p);
+
+let a=Math.random()*2*Math.PI;
+let d=Math.random()*400+200;
+
+p.animate([
+{transform:"translate(0,0)",opacity:1},
+{transform:`translate(${Math.cos(a)*d}px,${Math.sin(a)*d}px)`,opacity:0}
+],{duration:1500});
+
+setTimeout(()=>p.remove(),1500);
+}
 
 </script>
 
