@@ -25,7 +25,7 @@ body{
     100%{background-position:0% 50%;}
 }
 
-/* ⭐ estrelas */
+/* estrelas */
 .star{
     position:fixed;
     width:2px;
@@ -41,7 +41,7 @@ body{
     to{opacity:1;}
 }
 
-/* 💕 corações */
+/* corações */
 .heart{
     position:fixed;
     pointer-events:none;
@@ -52,14 +52,14 @@ body{
     to{transform:translateY(100vh);opacity:0;}
 }
 
-/* 🌸 pétalas */
+/* pétalas */
 .petal{
     position:fixed;
     pointer-events:none;
     filter:drop-shadow(0 0 8px pink);
 }
 
-/* tela inicial */
+/* start */
 #startScreen{
     position:fixed;
     width:100%;
@@ -72,7 +72,7 @@ body{
     cursor:pointer;
 }
 
-/* conteúdo */
+/* content */
 #content{
     display:none;
     position:relative;
@@ -88,29 +88,6 @@ body{
     color:#ff85a2;
 }
 
-/* imagens */
-.love-section{
-    margin:60px auto;
-    max-width:700px;
-}
-
-.love-item{
-    margin-bottom:80px;
-}
-
-.love-text{
-    font-family:'Great Vibes';
-    font-size:2.2rem;
-    margin-bottom:20px;
-}
-
-.love-item img{
-    width:100%;
-    max-height:70vh;
-    object-fit:contain;
-    border-radius:15px;
-}
-
 /* texto */
 .letter{
     max-width:700px;
@@ -122,47 +99,53 @@ body{
     min-height:200px;
 }
 
-/* 🔥 SEÇÃO US */
+/* US SECTION (7 slots) */
 .us-section{
     max-width:900px;
     margin:60px auto;
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-    gap:20px;
+    display:none; /* 👈 começa escondido */
+    grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+    gap:15px;
 }
 
+/* US CARD */
 .us-card{
     position:relative;
-    cursor:pointer;
-}
-
-.us-card img{
-    width:100%;
+    height:160px;
+    background:#000;
+    border:1px solid #333;
     border-radius:15px;
-    opacity:0;
-    transform:scale(0.9);
-    transition:0.6s;
+    cursor:pointer;
+    overflow:hidden;
 }
 
+/* texto US? */
 .us-card::before{
     content:"US?";
     position:absolute;
     width:100%;
     height:100%;
-    background:#000;
-    color:#fff;
-    font-family:'Great Vibes';
-    font-size:3rem;
     display:flex;
     justify-content:center;
     align-items:center;
-    border-radius:15px;
-    transition:0.6s;
+    font-family:'Great Vibes';
+    font-size:2.5rem;
+    color:#fff;
+    transition:0.5s;
 }
 
+/* imagem */
+.us-card img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    opacity:0;
+    transition:0.5s;
+}
+
+/* reveal */
 .us-card.active img{
     opacity:1;
-    transform:scale(1);
 }
 
 .us-card.active::before{
@@ -212,31 +195,18 @@ body{
 
 <h1 class="name">Gabrielly 💕</h1>
 
-<section class="love-section">
-<div class="love-item">
-<div class="love-text">Eu amo você como o Joe ama a Love</div>
-<img src="amm.jpg">
-</div>
-
-<div class="love-item">
-<div class="love-text">Eu amo você como o Leon ama a Ada</div>
-<img src="aa.jpg.jfif">
-</div>
-
-<div class="love-item">
-<div class="love-text">Eu amo você como o Escanor ama a Merlin</div>
-<img src="cc.jpg.jfif">
-</div>
-</section>
-
 <div class="letter" id="typing"></div>
 
-<!-- 🔥 NOVA PARTE -->
+<!-- 7 US SLOTS -->
 <section class="us-section">
 
-<div class="us-card"><img src="amm.jpg"></div>
-<div class="us-card"><img src="aa.jpg.jfif"></div>
-<div class="us-card"><img src="cc.jpg.jfif"></div>
+<div class="us-card"><img src="img1.jpg"></div>
+<div class="us-card"><img src="img2.jpg"></div>
+<div class="us-card"><img src="img3.jpg"></div>
+<div class="us-card"><img src="img4.jpg"></div>
+<div class="us-card"><img src="img5.jpg"></div>
+<div class="us-card"><img src="img6.jpg"></div>
+<div class="us-card"><img src="img7.jpg"></div>
 
 </section>
 
@@ -252,7 +222,7 @@ body{
 
 <script>
 
-// estrelas
+/* estrelas */
 for(let i=0;i<120;i++){
 let s=document.createElement("div");
 s.classList.add("star");
@@ -261,7 +231,7 @@ s.style.left=Math.random()*100+"vw";
 document.body.appendChild(s);
 }
 
-// texto completo
+/* TEXTO COMPLETO */
 const text=`Depois que eu vi aquilo que vc fez pra mim, eu fiquei um tempo olhando pra tela...
 
 Não foi só por ler… foi porque eu senti cada palavra.
@@ -272,32 +242,24 @@ Hoje qualquer coisa que acontece eu penso em você.
 
 E eu quero continuar com voce até o fim. 🤍`;
 
-let i=0, started=false;
+let i=0;
+let started=false;
 
 function typing(){
-if(i<text.length){
-document.getElementById("typing").innerHTML+=text.charAt(i);
+if(i < text.length){
+document.getElementById("typing").innerHTML += text.charAt(i);
 i++;
 setTimeout(typing,30);
 }else{
+
+// 👇 QUANDO TERMINA TEXTO -> MOSTRA US
+document.querySelector(".us-section").style.display = "grid";
+
 document.getElementById("finalText").classList.add("active");
 }
 }
 
-window.addEventListener("scroll",()=>{
-let pos=document.getElementById("typing").getBoundingClientRect().top;
-if(pos<window.innerHeight-100 && !started){
-started=true;
-typing();
-}
-});
-
-// revelar fotos
-document.querySelectorAll(".us-card").forEach(card=>{
-card.onclick=()=>card.classList.add("active");
-});
-
-// entrada
+/* start */
 document.getElementById("startScreen").onclick=()=>{
 document.getElementById("startScreen").style.display="none";
 document.getElementById("content").style.display="block";
@@ -312,48 +274,20 @@ if(v<0.4){v+=0.02;m.volume=v;}
 else clearInterval(fade);
 },200);
 
-for(let i=0;i<50;i++) createExplosionPetal();
+typing();
 };
 
-// botão música
+/* revelar US */
+document.querySelectorAll(".us-card").forEach(card=>{
+card.onclick=()=>card.classList.toggle("active");
+});
+
+/* música */
 document.getElementById("musicBtn").onclick=()=>{
 let m=document.getElementById("music");
 m.paused?m.play():m.pause();
 };
 
-// corações
-setInterval(()=>{
-let h=document.createElement("div");
-h.innerHTML="💕";
-h.classList.add("heart");
-h.style.left=Math.random()*100+"vw";
-h.style.fontSize=(Math.random()*20+15)+"px";
-h.style.animationDuration=(Math.random()*4+4)+"s";
-document.body.appendChild(h);
-setTimeout(()=>h.remove(),7000);
-},300);
-
-// explosão
-function createExplosionPetal(){
-let p=document.createElement("div");
-p.innerHTML="🌸";
-p.classList.add("petal");
-p.style.left="50%";
-p.style.top="50%";
-p.style.fontSize=(Math.random()*20+15)+"px";
-
-document.body.appendChild(p);
-
-let a=Math.random()*2*Math.PI;
-let d=Math.random()*400+200;
-
-p.animate([
-{transform:"translate(0,0)",opacity:1},
-{transform:`translate(${Math.cos(a)*d}px,${Math.sin(a)*d}px)`,opacity:0}
-],{duration:1500});
-
-setTimeout(()=>p.remove(),1500);
-}
 </script>
 
 </body>
