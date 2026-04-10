@@ -19,14 +19,13 @@ body{
     overflow-x:hidden;
 }
 
-/* fundo */
 @keyframes gradientBG{
     0%{background-position:0% 50%;}
     50%{background-position:100% 50%;}
     100%{background-position:0% 50%;}
 }
 
-/* estrelas com leve movimento */
+/* estrelas */
 .star{
     position:fixed;
     width:2px;
@@ -37,26 +36,8 @@ body{
 }
 
 @keyframes twinkle{
-    from{opacity:0.2; transform:translateY(0);}
-    to{opacity:1; transform:translateY(-3px);}
-}
-
-/* coração */
-.heart{
-    position:fixed;
-    pointer-events:none;
-    animation:fall linear forwards;
-}
-
-@keyframes fall{
-    to{transform:translateY(100vh);opacity:0;}
-}
-
-/* pétalas */
-.petal{
-    position:fixed;
-    pointer-events:none;
-    filter:drop-shadow(0 0 8px pink);
+    from{opacity:0.2;}
+    to{opacity:1;}
 }
 
 /* start */
@@ -88,7 +69,30 @@ body{
     color:#ff85a2;
 }
 
-/* texto */
+/* 💖 FRASES DO TOPO (RESTORE) */
+.love-section{
+    margin:60px auto;
+    max-width:700px;
+}
+
+.love-item{
+    margin-bottom:80px;
+}
+
+.love-text{
+    font-family:'Great Vibes';
+    font-size:2.2rem;
+    margin-bottom:20px;
+}
+
+.love-item img{
+    width:100%;
+    max-height:70vh;
+    object-fit:contain;
+    border-radius:15px;
+}
+
+/* TEXTO */
 .letter{
     max-width:700px;
     margin:80px auto;
@@ -99,7 +103,7 @@ body{
     min-height:200px;
 }
 
-/* US */
+/* US SECTION (AGORA 11 SLOTS) */
 .us-section{
     max-width:900px;
     margin:60px auto;
@@ -108,7 +112,7 @@ body{
     gap:15px;
 }
 
-/* card cinematográfico */
+/* CARD */
 .us-card{
     position:relative;
     height:160px;
@@ -117,18 +121,18 @@ body{
     border-radius:15px;
     cursor:pointer;
     overflow:hidden;
+
     opacity:0;
     transform:translateY(20px) scale(0.95);
     transition:0.6s;
 }
 
-/* aparece um por um */
 .us-card.show{
     opacity:1;
     transform:translateY(0) scale(1);
 }
 
-/* texto US? */
+/* US? */
 .us-card::before{
     content:"US?";
     position:absolute;
@@ -152,14 +156,8 @@ body{
     transition:0.5s;
 }
 
-/* reveal */
-.us-card.active img{
-    opacity:1;
-}
-
-.us-card.active::before{
-    opacity:0;
-}
+.us-card.active img{opacity:1;}
+.us-card.active::before{opacity:0;}
 
 /* final */
 .final{
@@ -204,25 +202,50 @@ body{
 
 <h1 class="name">Gabrielly 💕</h1>
 
+<!-- 💖 RESTAURADO -->
+<section class="love-section">
+<div class="love-item">
+<div class="love-text">Eu amo você como o Joe ama a Love</div>
+<img src="amm.jpg">
+</div>
+
+<div class="love-item">
+<div class="love-text">Eu amo você como o Leon ama a Ada</div>
+<img src="aa.jpg.jfif">
+</div>
+
+<div class="love-item">
+<div class="love-text">Eu amo você como o Escanor ama a Merlin</div>
+<img src="cc.jpg.jfif">
+</div>
+</section>
+
 <div class="letter" id="typing"></div>
 
+<!-- 🔥 11 US SLOTS (3 antigos + 4 novos + 4 extras) -->
 <section class="us-section">
 
 <div class="us-card"><img src="amm.jpg"></div>
 <div class="us-card"><img src="aa.jpg.jfif"></div>
 <div class="us-card"><img src="cc.jpg.jfif"></div>
 
+<!-- NOVOS 4 -->
+<div class="us-card"><img src="amm.jpg"></div>
+<div class="us-card"><img src="aa.jpg.jfif"></div>
+<div class="us-card"><img src="cc.jpg.jfif"></div>
+<div class="us-card"><img src="amm.jpg"></div>
+
+<!-- EXTRAS 4 -->
+<div class="us-card"><img src="aa.jpg.jfif"></div>
+<div class="us-card"><img src="cc.jpg.jfif"></div>
+<div class="us-card"><img src="amm.jpg"></div>
+<div class="us-card"><img src="aa.jpg.jfif"></div>
+
 </section>
 
 <div class="final" id="finalText">Eu te amo Gabrielly 💕</div>
 
 </div>
-
-<audio id="music" loop>
-<source src="Arctic Monkeys - Do I Wanna Know_ (Lyrics) [PUL2mVdt3xo].mp3">
-</audio>
-
-<button class="music-btn" id="musicBtn">🔊</button>
 
 <script>
 
@@ -235,8 +258,8 @@ s.style.left=Math.random()*100+"vw";
 document.body.appendChild(s);
 }
 
-/* TEXTO COMPLETO (EXATO COMO VOCÊ MANDOU) */
-const text = `Depois que eu vi aquilo que vc fez pra mim, eu fiquei um tempo olhando pra tela depois de terminar de ler…
+/* TEXTO COMPLETO */
+const text=`Depois que eu vi aquilo que vc fez pra mim, eu fiquei um tempo olhando pra tela depois de terminar de ler…
 
 Não foi só por ler… foi porque eu senti cada palavra.
 
@@ -266,34 +289,27 @@ Mas sei que eu quero continuar com voce até o fim.
 
 Sem pressa… mas só nós dois, do nosso jeito. 🤍`;
 
-let i = 0;
-let started = false;
+let i=0;
+let started=false;
 
 function typing(){
 if(i < text.length){
 document.getElementById("typing").innerHTML += text.charAt(i);
 i++;
-
-/* pausas emocionais */
-let delay = 18;
-if(text.charAt(i) === "…") delay = 120;
-if(text.charAt(i) === ".") delay = 60;
-
-setTimeout(typing, delay);
-
+setTimeout(typing,30);
 }else{
 document.getElementById("finalText").classList.add("active");
 revealUS();
 }
 }
 
-/* US cinematográfico (um por um) */
+/* US aparece um por um */
 function revealUS(){
 const cards = document.querySelectorAll(".us-card");
-cards.forEach((c, i)=>{
+cards.forEach((c,i)=>{
 setTimeout(()=>{
 c.classList.add("show");
-}, i * 400);
+}, i*250);
 });
 }
 
@@ -302,29 +318,13 @@ document.getElementById("startScreen").onclick=()=>{
 document.getElementById("startScreen").style.display="none";
 document.getElementById("content").style.display="block";
 
-let m=document.getElementById("music");
-m.volume=0;
-m.play();
-
-let v=0;
-let fade=setInterval(()=>{
-if(v<0.4){v+=0.02;m.volume=v;}
-else clearInterval(fade);
-},200);
-
 typing();
 };
 
-/* US click */
+/* clicar US */
 document.querySelectorAll(".us-card").forEach(card=>{
 card.onclick=()=>card.classList.toggle("active");
 });
-
-/* música */
-document.getElementById("musicBtn").onclick=()=>{
-let m=document.getElementById("music");
-m.paused?m.play():m.pause();
-};
 
 </script>
 
