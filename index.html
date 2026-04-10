@@ -19,14 +19,13 @@ body{
     overflow-x:hidden;
 }
 
-/* 🌈 FUNDO */
 @keyframes gradientBG{
     0%{background-position:0% 50%;}
     50%{background-position:100% 50%;}
     100%{background-position:0% 50%;}
 }
 
-/* ⭐ ESTRELAS */
+/* ⭐ estrelas */
 .star{
     position:fixed;
     width:2px;
@@ -42,26 +41,25 @@ body{
     to{opacity:1;}
 }
 
-/* 💕 CORAÇÕES */
+/* 💕 corações */
 .heart{
     position:fixed;
     pointer-events:none;
     animation:fall linear forwards;
-    filter:drop-shadow(0 0 6px #ff4d6d);
 }
 
 @keyframes fall{
     to{transform:translateY(100vh);opacity:0;}
 }
 
-/* 🌸 PÉTALAS */
+/* 🌸 pétalas */
 .petal{
     position:fixed;
     pointer-events:none;
     filter:drop-shadow(0 0 8px pink);
 }
 
-/* TELA INICIAL */
+/* tela inicial */
 #startScreen{
     position:fixed;
     width:100%;
@@ -74,12 +72,7 @@ body{
     cursor:pointer;
 }
 
-#startScreen h1{
-    font-family:'Great Vibes';
-    font-size:3rem;
-}
-
-/* CONTEÚDO */
+/* conteúdo */
 #content{
     display:none;
     position:relative;
@@ -87,7 +80,7 @@ body{
     text-align:center;
 }
 
-/* NOME */
+/* nome */
 .name{
     margin-top:60px;
     font-family:'Great Vibes';
@@ -95,7 +88,7 @@ body{
     color:#ff85a2;
 }
 
-/* SEÇÃO */
+/* imagens */
 .love-section{
     margin:60px auto;
     max-width:700px;
@@ -103,11 +96,6 @@ body{
 
 .love-item{
     margin-bottom:80px;
-    transition:0.5s;
-}
-
-.love-item:hover{
-    transform:scale(1.02);
 }
 
 .love-text{
@@ -123,7 +111,7 @@ body{
     border-radius:15px;
 }
 
-/* CARTA */
+/* texto */
 .letter{
     max-width:700px;
     margin:80px auto;
@@ -134,11 +122,57 @@ body{
     min-height:200px;
 }
 
-/* FINAL */
+/* 🔥 SEÇÃO US */
+.us-section{
+    max-width:900px;
+    margin:60px auto;
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    gap:20px;
+}
+
+.us-card{
+    position:relative;
+    cursor:pointer;
+}
+
+.us-card img{
+    width:100%;
+    border-radius:15px;
+    opacity:0;
+    transform:scale(0.9);
+    transition:0.6s;
+}
+
+.us-card::before{
+    content:"US?";
+    position:absolute;
+    width:100%;
+    height:100%;
+    background:#000;
+    color:#fff;
+    font-family:'Great Vibes';
+    font-size:3rem;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    border-radius:15px;
+    transition:0.6s;
+}
+
+.us-card.active img{
+    opacity:1;
+    transform:scale(1);
+}
+
+.us-card.active::before{
+    opacity:0;
+}
+
+/* final */
 .final{
     font-family:'Great Vibes';
     font-size:3.5rem;
-    text-align:center;
     margin:120px 0;
     opacity:0;
     transform:scale(0.5);
@@ -151,7 +185,7 @@ body{
     text-shadow:0 0 20px #ff4d6d;
 }
 
-/* BOTÃO */
+/* botão música */
 .music-btn{
     position:fixed;
     bottom:20px;
@@ -164,7 +198,6 @@ body{
     color:#fff;
     font-size:20px;
     cursor:pointer;
-    z-index:999;
 }
 </style>
 </head>
@@ -172,7 +205,7 @@ body{
 <body>
 
 <div id="startScreen">
-    <h1>clique para entrar 🤍</h1>
+<h1>clique para entrar 🤍</h1>
 </div>
 
 <div id="content">
@@ -180,25 +213,32 @@ body{
 <h1 class="name">Gabrielly 💕</h1>
 
 <section class="love-section">
-
 <div class="love-item">
-    <div class="love-text">Eu amo você como o Joe ama a Love</div>
-    <img src="amm.jpg">
+<div class="love-text">Eu amo você como o Joe ama a Love</div>
+<img src="amm.jpg">
 </div>
 
 <div class="love-item">
-    <div class="love-text">Eu amo você como o Leon ama a Ada</div>
-    <img src="aa.jpg.jfif">
+<div class="love-text">Eu amo você como o Leon ama a Ada</div>
+<img src="aa.jpg.jfif">
 </div>
 
 <div class="love-item">
-    <div class="love-text">Eu amo você como o Escanor ama a Merlin</div>
-    <img src="cc.jpg.jfif">
+<div class="love-text">Eu amo você como o Escanor ama a Merlin</div>
+<img src="cc.jpg.jfif">
 </div>
-
 </section>
 
 <div class="letter" id="typing"></div>
+
+<!-- 🔥 NOVA PARTE -->
+<section class="us-section">
+
+<div class="us-card"><img src="amm.jpg"></div>
+<div class="us-card"><img src="aa.jpg.jfif"></div>
+<div class="us-card"><img src="cc.jpg.jfif"></div>
+
+</section>
 
 <div class="final" id="finalText">Eu te amo Gabrielly 💕</div>
 
@@ -212,109 +252,108 @@ body{
 
 <script>
 
-// ⭐ CRIAR ESTRELAS
+// estrelas
 for(let i=0;i<120;i++){
-    const star=document.createElement("div");
-    star.classList.add("star");
-    star.style.top=Math.random()*100+"vh";
-    star.style.left=Math.random()*100+"vw";
-    document.body.appendChild(star);
+let s=document.createElement("div");
+s.classList.add("star");
+s.style.top=Math.random()*100+"vh";
+s.style.left=Math.random()*100+"vw";
+document.body.appendChild(s);
 }
 
-// TEXTO
-const text = `Depois que eu vi aquilo que vc fez pra mim...
+// texto completo
+const text=`Depois que eu vi aquilo que vc fez pra mim, eu fiquei um tempo olhando pra tela...
 
-Eu senti cada palavra.
+Não foi só por ler… foi porque eu senti cada palavra.
 
-Você virou alguém muito importante pra mim.
+Eu não sei em que momento você virou alguém tão presente pra mim.
 
-E eu quero continuar com você até o fim. 🤍`;
+Hoje qualquer coisa que acontece eu penso em você.
 
-let i=0;
-let started=false;
+E eu quero continuar com voce até o fim. 🤍`;
+
+let i=0, started=false;
 
 function typing(){
-    if(i < text.length){
-        document.getElementById("typing").innerHTML += text.charAt(i);
-        i++;
-        setTimeout(typing,30);
-    }else{
-        document.getElementById("finalText").classList.add("active");
-    }
+if(i<text.length){
+document.getElementById("typing").innerHTML+=text.charAt(i);
+i++;
+setTimeout(typing,30);
+}else{
+document.getElementById("finalText").classList.add("active");
+}
 }
 
-// SCROLL ATIVA TEXTO
 window.addEventListener("scroll",()=>{
-    const letter=document.getElementById("typing");
-    const pos=letter.getBoundingClientRect().top;
-
-    if(pos < window.innerHeight - 100 && !started){
-        started=true;
-        typing();
-    }
+let pos=document.getElementById("typing").getBoundingClientRect().top;
+if(pos<window.innerHeight-100 && !started){
+started=true;
+typing();
+}
 });
 
-// ENTRADA
-document.getElementById("startScreen").onclick = () => {
+// revelar fotos
+document.querySelectorAll(".us-card").forEach(card=>{
+card.onclick=()=>card.classList.add("active");
+});
 
-    document.getElementById("startScreen").style.display="none";
-    document.getElementById("content").style.display="block";
+// entrada
+document.getElementById("startScreen").onclick=()=>{
+document.getElementById("startScreen").style.display="none";
+document.getElementById("content").style.display="block";
 
-    const music=document.getElementById("music");
-    music.volume=0;
-    music.play();
+let m=document.getElementById("music");
+m.volume=0;
+m.play();
 
-    let v=0;
-    const fade=setInterval(()=>{
-        if(v<0.4){v+=0.02;music.volume=v;}
-        else clearInterval(fade);
-    },200);
+let v=0;
+let fade=setInterval(()=>{
+if(v<0.4){v+=0.02;m.volume=v;}
+else clearInterval(fade);
+},200);
 
-    for(let i=0;i<50;i++){
-        createExplosionPetal();
-    }
+for(let i=0;i<50;i++) createExplosionPetal();
 };
 
-// BOTÃO MÚSICA
+// botão música
 document.getElementById("musicBtn").onclick=()=>{
-    const m=document.getElementById("music");
-    m.paused?m.play():m.pause();
+let m=document.getElementById("music");
+m.paused?m.play():m.pause();
 };
 
-// CORAÇÕES
+// corações
 setInterval(()=>{
-    const h=document.createElement("div");
-    h.innerHTML="💕";
-    h.classList.add("heart");
-    h.style.left=Math.random()*100+"vw";
-    h.style.fontSize=(Math.random()*20+15)+"px";
-    h.style.animationDuration=(Math.random()*4+4)+"s";
-    document.body.appendChild(h);
-    setTimeout(()=>h.remove(),7000);
+let h=document.createElement("div");
+h.innerHTML="💕";
+h.classList.add("heart");
+h.style.left=Math.random()*100+"vw";
+h.style.fontSize=(Math.random()*20+15)+"px";
+h.style.animationDuration=(Math.random()*4+4)+"s";
+document.body.appendChild(h);
+setTimeout(()=>h.remove(),7000);
 },300);
 
-// EXPLOSÃO
+// explosão
 function createExplosionPetal(){
-    const p=document.createElement("div");
-    p.innerHTML="🌸";
-    p.classList.add("petal");
-    p.style.left="50%";
-    p.style.top="50%";
-    p.style.fontSize=(Math.random()*20+15)+"px";
+let p=document.createElement("div");
+p.innerHTML="🌸";
+p.classList.add("petal");
+p.style.left="50%";
+p.style.top="50%";
+p.style.fontSize=(Math.random()*20+15)+"px";
 
-    document.body.appendChild(p);
+document.body.appendChild(p);
 
-    const a=Math.random()*2*Math.PI;
-    const d=Math.random()*400+200;
+let a=Math.random()*2*Math.PI;
+let d=Math.random()*400+200;
 
-    p.animate([
-        {transform:"translate(0,0)",opacity:1},
-        {transform:`translate(${Math.cos(a)*d}px,${Math.sin(a)*d}px)`,opacity:0}
-    ],{duration:1500});
+p.animate([
+{transform:"translate(0,0)",opacity:1},
+{transform:`translate(${Math.cos(a)*d}px,${Math.sin(a)*d}px)`,opacity:0}
+],{duration:1500});
 
-    setTimeout(()=>p.remove(),1500);
+setTimeout(()=>p.remove(),1500);
 }
-
 </script>
 
 </body>
